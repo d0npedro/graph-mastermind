@@ -1,0 +1,117 @@
+{
+  "id": "software-modules",
+  "title": "Software-Module",
+  "description": "Interne Pakete und ihre gerichteten Abhängigkeiten. Fallback-Sample, kein konkretes Zielrepo.",
+  "nodes": [
+    {
+      "id": "app-web",
+      "label": "Web-App",
+      "group": "apps",
+      "description": "Benutzeroberfläche. Darf Domain und API-Client nutzen, kein direkter Datenbankzugriff.",
+      "meta": { "schicht": "ui", "sprache": "TypeScript" }
+    },
+    {
+      "id": "app-worker",
+      "label": "Worker",
+      "group": "apps",
+      "description": "Hintergrundjobs. Liest Domain und Ports, schreibt über Repositories.",
+      "meta": { "schicht": "runtime", "sprache": "TypeScript" }
+    },
+    {
+      "id": "pkg-domain",
+      "label": "Domain",
+      "group": "core",
+      "description": "Entitäten, Invarianten, Use-Cases. Keine Framework-Imports.",
+      "meta": { "schicht": "domain" }
+    },
+    {
+      "id": "pkg-api-client",
+      "label": "API-Client",
+      "group": "adapters",
+      "description": "HTTP-Client gegen die eigene API. Von der Web-App genutzt.",
+      "meta": { "schicht": "adapter" }
+    },
+    {
+      "id": "pkg-api",
+      "label": "HTTP-API",
+      "group": "adapters",
+      "description": "Routen und Auth-Grenzen. Übersetzt HTTP in Domain-Befehle.",
+      "meta": { "schicht": "adapter" }
+    },
+    {
+      "id": "pkg-db",
+      "label": "Persistenz",
+      "group": "adapters",
+      "description": "Repository-Implementierungen. Einziger Ort mit SQL.",
+      "meta": { "schicht": "adapter" }
+    },
+    {
+      "id": "pkg-queue",
+      "label": "Queue",
+      "group": "adapters",
+      "description": "Job-Producer und -Consumer. Worker hängt hier, nicht die Web-App.",
+      "meta": { "schicht": "adapter" }
+    },
+    {
+      "id": "pkg-auth",
+      "label": "Auth-Port",
+      "group": "core",
+      "description": "Identität und Sitzung als Domain-Port, ohne Vendor-SDK.",
+      "meta": { "schicht": "domain" }
+    },
+    {
+      "id": "pkg-config",
+      "label": "Config",
+      "group": "platform",
+      "description": "Umgebungswerte, einmal gelesen, überall typisiert.",
+      "meta": { "schicht": "platform" }
+    },
+    {
+      "id": "pkg-logging",
+      "label": "Logging",
+      "group": "platform",
+      "description": "Strukturierte Logs. Keine fachliche Abhängigkeit zurück.",
+      "meta": { "schicht": "platform" }
+    },
+    {
+      "id": "pkg-ui-kit",
+      "label": "UI-Kit",
+      "group": "apps",
+      "description": "Geteilte Präsentationskomponenten. Kennt keine Domain-Typen.",
+      "meta": { "schicht": "ui" }
+    },
+    {
+      "id": "ext-postgres",
+      "label": "Postgres",
+      "group": "extern",
+      "description": "Datenspeicher. Nur Persistenz spricht ihn an.",
+      "meta": { "art": "infrastruktur" }
+    },
+    {
+      "id": "ext-redis",
+      "label": "Redis",
+      "group": "extern",
+      "description": "Broker für die Queue.",
+      "meta": { "art": "infrastruktur" }
+    }
+  ],
+  "links": [
+    { "source": "app-web", "target": "pkg-ui-kit", "label": "nutzt" },
+    { "source": "app-web", "target": "pkg-api-client", "label": "spricht" },
+    { "source": "app-web", "target": "pkg-auth", "label": "prüft" },
+    { "source": "pkg-api-client", "target": "pkg-api", "label": "ruft" },
+    { "source": "pkg-api", "target": "pkg-domain", "label": "übersetzt" },
+    { "source": "pkg-api", "target": "pkg-auth", "label": "sichert" },
+    { "source": "pkg-api", "target": "pkg-config", "label": "liest" },
+    { "source": "pkg-api", "target": "pkg-logging", "label": "protokolliert" },
+    { "source": "app-worker", "target": "pkg-queue", "label": "konsumiert" },
+    { "source": "app-worker", "target": "pkg-domain", "label": "führt aus" },
+    { "source": "app-worker", "target": "pkg-logging", "label": "protokolliert" },
+    { "source": "pkg-domain", "target": "pkg-db", "label": "port" },
+    { "source": "pkg-domain", "target": "pkg-queue", "label": "plant" },
+    { "source": "pkg-db", "target": "ext-postgres", "label": "schreibt", "weight": 2 },
+    { "source": "pkg-queue", "target": "ext-redis", "label": "queued", "weight": 2 },
+    { "source": "pkg-db", "target": "pkg-config", "label": "liest" },
+    { "source": "pkg-queue", "target": "pkg-config", "label": "liest" }
+  ]
+}

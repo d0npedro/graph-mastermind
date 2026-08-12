@@ -1,0 +1,83 @@
+{
+  "id": "datamodel",
+  "title": "Datenmodell",
+  "description": "Entitäten und Relationen einer kleinen Auftragsdomäne. Fallback-Sample.",
+  "nodes": [
+    {
+      "id": "ent-user",
+      "label": "User",
+      "group": "identitaet",
+      "description": "Anmeldename, Status, Zeitzone.",
+      "meta": { "schluessel": "user_id" }
+    },
+    {
+      "id": "ent-org",
+      "label": "Organisation",
+      "group": "identitaet",
+      "description": "Mandant. Alle Vorgänge hängen hier.",
+      "meta": { "schluessel": "org_id" }
+    },
+    {
+      "id": "ent-item",
+      "label": "Item",
+      "group": "katalog",
+      "description": "Verkaufbare Einheit, SKU, Preisstand.",
+      "meta": { "schluessel": "item_id" }
+    },
+    {
+      "id": "ent-order",
+      "label": "Order",
+      "group": "transaktion",
+      "description": "Kopf: Kunde, Status, Summe.",
+      "meta": { "schluessel": "order_id" }
+    },
+    {
+      "id": "ent-line",
+      "label": "OrderLine",
+      "group": "transaktion",
+      "description": "Menge und Einzelpreis. Keine eigene Lebenszeit ohne Order.",
+      "meta": { "schluessel": "line_id" }
+    },
+    {
+      "id": "ent-invoice",
+      "label": "Invoice",
+      "group": "transaktion",
+      "description": "Eine Order kann mehrere Teilrechnungen haben.",
+      "meta": { "schluessel": "invoice_id" }
+    },
+    {
+      "id": "ent-event",
+      "label": "DomainEvent",
+      "group": "protokoll",
+      "description": "Unveränderliche Spur: was wann an welcher Entität geschah.",
+      "meta": { "schluessel": "event_id" }
+    },
+    {
+      "id": "ent-outbox",
+      "label": "Outbox",
+      "group": "protokoll",
+      "description": "Zu versendende Events. Worker leert sie.",
+      "meta": { "schluessel": "outbox_id" }
+    },
+    {
+      "id": "ent-audit",
+      "label": "AuditRow",
+      "group": "protokoll",
+      "description": "Wer hat welches Feld geändert.",
+      "meta": { "schluessel": "audit_id" }
+    }
+  ],
+  "links": [
+    { "source": "ent-user", "target": "ent-org", "label": "gehört zu" },
+    { "source": "ent-order", "target": "ent-org", "label": "gehört zu" },
+    { "source": "ent-order", "target": "ent-user", "label": "angelegt von" },
+    { "source": "ent-line", "target": "ent-order", "label": "Teil von", "weight": 2 },
+    { "source": "ent-line", "target": "ent-item", "label": "referenziert" },
+    { "source": "ent-item", "target": "ent-org", "label": "gehört zu" },
+    { "source": "ent-invoice", "target": "ent-order", "label": "zu" },
+    { "source": "ent-event", "target": "ent-order", "label": "betrifft" },
+    { "source": "ent-event", "target": "ent-outbox", "label": "wird zu" },
+    { "source": "ent-audit", "target": "ent-user", "label": "wer" },
+    { "source": "ent-audit", "target": "ent-order", "label": "was" }
+  ]
+}

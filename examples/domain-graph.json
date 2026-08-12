@@ -1,0 +1,92 @@
+{
+  "id": "domain",
+  "title": "Fachliche Konzepte",
+  "description": "Eine geschlossene Beispieldomäne (Auftragsfluss). Fallback, wenn das Zielrepo keine Fachsprache hergibt.",
+  "nodes": [
+    {
+      "id": "customer",
+      "label": "Kunde",
+      "group": "akteure",
+      "description": "Person oder Firma, die einen Auftrag auslöst.",
+      "meta": { "stabilitaet": "hoch" }
+    },
+    {
+      "id": "catalog",
+      "label": "Katalog",
+      "group": "bestand",
+      "description": "Verkaufbare Positionen mit Preis und Verfügbarkeit.",
+      "meta": { "stabilitaet": "mittel" }
+    },
+    {
+      "id": "offer",
+      "label": "Angebot",
+      "group": "vorgang",
+      "description": "Zeitlich begrenzte Zusage gegenüber einem Kunden.",
+      "meta": { "lebensdauer": "kurz" }
+    },
+    {
+      "id": "order",
+      "label": "Auftrag",
+      "group": "vorgang",
+      "description": "Verbindliche Bestellung. Kernobjekt des Flusses.",
+      "meta": { "lebensdauer": "mittel" }
+    },
+    {
+      "id": "fulfillment",
+      "label": "Erfüllung",
+      "group": "vorgang",
+      "description": "Physische oder digitale Lieferung des Auftrags.",
+      "meta": { "lebensdauer": "kurz" }
+    },
+    {
+      "id": "invoice",
+      "label": "Rechnung",
+      "group": "geld",
+      "description": "Forderung, die aus dem Auftrag entsteht.",
+      "meta": { "stabilitaet": "hoch" }
+    },
+    {
+      "id": "payment",
+      "label": "Zahlung",
+      "group": "geld",
+      "description": "Ausgleich einer Rechnung.",
+      "meta": { "stabilitaet": "hoch" }
+    },
+    {
+      "id": "policy",
+      "label": "Regelwerk",
+      "group": "steuerung",
+      "description": "Rabatte, Limits, Storno. Gehört nicht in die UI.",
+      "meta": { "stabilitaet": "mittel" }
+    },
+    {
+      "id": "inventory",
+      "label": "Bestand",
+      "group": "bestand",
+      "description": "Zählbare Menge hinter dem Katalog.",
+      "meta": { "stabilitaet": "niedrig" }
+    },
+    {
+      "id": "ticket",
+      "label": "Vorgang Support",
+      "group": "akteure",
+      "description": "Nachgelagerte Klärung, wenn Erfüllung oder Zahlung hakt.",
+      "meta": { "lebensdauer": "variabel" }
+    }
+  ],
+  "links": [
+    { "source": "customer", "target": "offer", "label": "erhält" },
+    { "source": "catalog", "target": "offer", "label": "speist" },
+    { "source": "offer", "target": "order", "label": "wird zu" },
+    { "source": "order", "target": "fulfillment", "label": "löst aus" },
+    { "source": "order", "target": "invoice", "label": "erzeugt" },
+    { "source": "invoice", "target": "payment", "label": "fordert" },
+    { "source": "policy", "target": "offer", "label": "begrenzt" },
+    { "source": "policy", "target": "order", "label": "prüft" },
+    { "source": "inventory", "target": "catalog", "label": "deckt" },
+    { "source": "fulfillment", "target": "inventory", "label": "entnimmt" },
+    { "source": "customer", "target": "ticket", "label": "öffnet" },
+    { "source": "fulfillment", "target": "ticket", "label": "kann auslösen" },
+    { "source": "payment", "target": "ticket", "label": "kann auslösen" }
+  ]
+}

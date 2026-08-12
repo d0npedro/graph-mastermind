@@ -1,0 +1,109 @@
+{
+  "id": "team",
+  "title": "Team und Verantwortung",
+  "description": "Rollen, Liefergegenstände und Wer wen braucht. Fallback-Sample, kein konkretes Zielrepo.",
+  "nodes": [
+    {
+      "id": "role-product",
+      "label": "Produkt",
+      "group": "steuerung",
+      "description": "Priorisiert, schneidet Releases, hält die Fachsprache fest.",
+      "meta": { "art": "rolle" }
+    },
+    {
+      "id": "role-design",
+      "label": "Design",
+      "group": "steuerung",
+      "description": "Flächen, Zustände, Sprache der Oberfläche.",
+      "meta": { "art": "rolle" }
+    },
+    {
+      "id": "role-frontend",
+      "label": "Frontend",
+      "group": "lieferung",
+      "description": "SPA, Graph-UI, Zugänglichkeit der Bedienung.",
+      "meta": { "art": "rolle" }
+    },
+    {
+      "id": "role-backend",
+      "label": "Backend",
+      "group": "lieferung",
+      "description": "API, Jobs, Persistenzgrenzen.",
+      "meta": { "art": "rolle" }
+    },
+    {
+      "id": "role-data",
+      "label": "Daten",
+      "group": "lieferung",
+      "description": "Modelle, Qualität, Auswertungen.",
+      "meta": { "art": "rolle" }
+    },
+    {
+      "id": "role-ops",
+      "label": "Betrieb",
+      "group": "plattform",
+      "description": "Deploy, Beobachtbarkeit, Wiederherstellung.",
+      "meta": { "art": "rolle" }
+    },
+    {
+      "id": "artifact-backlog",
+      "label": "Backlog",
+      "group": "artefakt",
+      "description": "Geordnete Arbeit. Quelle für Schnitte, nicht für Architektur.",
+      "meta": { "art": "artefakt" }
+    },
+    {
+      "id": "artifact-spec",
+      "label": "Spezifikation",
+      "group": "artefakt",
+      "description": "Verhalten und Grenzen, kurz genug zum Bauen.",
+      "meta": { "art": "artefakt" }
+    },
+    {
+      "id": "artifact-api",
+      "label": "API-Vertrag",
+      "group": "artefakt",
+      "description": "Stabile Kante zwischen Frontend und Backend.",
+      "meta": { "art": "artefakt" }
+    },
+    {
+      "id": "artifact-graph",
+      "label": "Netzwerkgraph",
+      "group": "artefakt",
+      "description": "Sichtbare Struktur des Systems für Menschen.",
+      "meta": { "art": "artefakt" }
+    },
+    {
+      "id": "artifact-runbook",
+      "label": "Runbook",
+      "group": "artefakt",
+      "description": "Was bei Ausfall zuerst passiert.",
+      "meta": { "art": "artefakt" }
+    },
+    {
+      "id": "circle-review",
+      "label": "Review",
+      "group": "ritual",
+      "description": "Gemeinsames Lesen vor dem Merge.",
+      "meta": { "art": "ritual" }
+    }
+  ],
+  "links": [
+    { "source": "role-product", "target": "artifact-backlog", "label": "führt" },
+    { "source": "role-product", "target": "artifact-spec", "label": "schneidet" },
+    { "source": "role-design", "target": "artifact-spec", "label": "gestaltet" },
+    { "source": "role-design", "target": "artifact-graph", "label": "prüft" },
+    { "source": "role-frontend", "target": "artifact-graph", "label": "baut" },
+    { "source": "role-frontend", "target": "artifact-api", "label": "konsumiert" },
+    { "source": "role-backend", "target": "artifact-api", "label": "stellt" },
+    { "source": "role-backend", "target": "role-data", "label": "braucht" },
+    { "source": "role-data", "target": "artifact-spec", "label": "härtet" },
+    { "source": "role-ops", "target": "artifact-runbook", "label": "hält" },
+    { "source": "role-ops", "target": "role-backend", "label": "betreibt" },
+    { "source": "artifact-spec", "target": "circle-review", "label": "geht in" },
+    { "source": "artifact-api", "target": "circle-review", "label": "geht in" },
+    { "source": "artifact-graph", "target": "circle-review", "label": "geht in" },
+    { "source": "role-frontend", "target": "circle-review", "label": "liest" },
+    { "source": "role-backend", "target": "circle-review", "label": "liest" }
+  ]
+}

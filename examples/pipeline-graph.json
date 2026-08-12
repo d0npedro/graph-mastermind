@@ -1,0 +1,82 @@
+{
+  "id": "pipeline",
+  "title": "Verarbeitungskette",
+  "description": "Schritte von der Aufnahme bis zur veröffentlichten Sicht. Fallback-Sample.",
+  "nodes": [
+    {
+      "id": "step-intake",
+      "label": "Aufnahme",
+      "group": "input",
+      "description": "Rohdaten landen unverändert im Eingang.",
+      "meta": { "automatisch": false }
+    },
+    {
+      "id": "step-validate",
+      "label": "Prüfen",
+      "group": "qualitaet",
+      "description": "Schema, Pflichtfelder, offensichtliche Widersprüche.",
+      "meta": { "automatisch": true }
+    },
+    {
+      "id": "step-normalize",
+      "label": "Normieren",
+      "group": "qualitaet",
+      "description": "IDs, Zeiten, Schreibweisen auf eine Form bringen.",
+      "meta": { "automatisch": true }
+    },
+    {
+      "id": "step-enrich",
+      "label": "Anreichern",
+      "group": "wissen",
+      "description": "Bekannte Entitäten und Kanten ergänzen.",
+      "meta": { "automatisch": true }
+    },
+    {
+      "id": "step-review",
+      "label": "Gegenlesen",
+      "group": "wissen",
+      "description": "Mensch bestätigt unsichere Kanten.",
+      "meta": { "automatisch": false }
+    },
+    {
+      "id": "step-graph",
+      "label": "Graph bauen",
+      "group": "sicht",
+      "description": "Knoten und Kanten für die Fläche ableiten.",
+      "meta": { "automatisch": true }
+    },
+    {
+      "id": "step-render",
+      "label": "Zeichnen",
+      "group": "sicht",
+      "description": "Force-Layout und Canvas. Kein neuer Fakt entsteht hier.",
+      "meta": { "automatisch": true }
+    },
+    {
+      "id": "step-publish",
+      "label": "Bereitstellen",
+      "group": "sicht",
+      "description": "Statisches Bundle oder Devserver. Kein Backend nötig.",
+      "meta": { "automatisch": true }
+    },
+    {
+      "id": "sink-reject",
+      "label": "Zurückweisen",
+      "group": "input",
+      "description": "Ungültige Aufnahme, mit Grund, ohne stille Korrektur.",
+      "meta": { "automatisch": true }
+    }
+  ],
+  "links": [
+    { "source": "step-intake", "target": "step-validate", "label": "weiter" },
+    { "source": "step-validate", "target": "sink-reject", "label": "bei Fehler" },
+    { "source": "step-validate", "target": "step-normalize", "label": "ok" },
+    { "source": "step-normalize", "target": "step-enrich", "label": "weiter" },
+    { "source": "step-enrich", "target": "step-review", "label": "unsicher" },
+    { "source": "step-enrich", "target": "step-graph", "label": "sicher" },
+    { "source": "step-review", "target": "step-graph", "label": "freigegeben" },
+    { "source": "step-review", "target": "sink-reject", "label": "verworfen" },
+    { "source": "step-graph", "target": "step-render", "label": "füllt" },
+    { "source": "step-render", "target": "step-publish", "label": "wird zu" }
+  ]
+}

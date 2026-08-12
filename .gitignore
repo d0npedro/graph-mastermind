@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+*.iml
+.vscode/
+.mastermind/
+node_modules/
+dist/
+target/
+build/
+*.log
+.gradle/
