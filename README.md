@@ -21,7 +21,7 @@ AI-Agent (oder du) **im Zielprojekt**, nachdem er `AGENT.md` gelesen hat.
 Neben das Zielprojekt oder hinein:
 
 ```bash
-git clone <dieses-repo> graph-mastermind
+git clone https://github.com/d0npedro/graph-mastermind.git
 ```
 
 Nur die Instruktionen reichen: `AGENT.md`, `SPEC.md`, `examples/`, `CHECKLIST.md`.
