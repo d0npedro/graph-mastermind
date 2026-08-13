@@ -5,6 +5,8 @@ diese Liste durchgehen. Ein offenes Kästchen = Lauf nicht fertig.
 
 ## Herkunft
 
+- [ ] Auf vorhandenen Stempel / vorhandene Runtime geprüft (Phase 0b)
+- [ ] Keine zweite Graph-App angelegt
 - [ ] Repo wurde gescannt (Baum, Manifeste, Docs, Domain-Typen)
 - [ ] Hauptgraph stammt aus dem Projekt **oder** Fallback ist schriftlich begründet
 - [ ] Fallback, falls genutzt, umfasst die fünf Datasets aus `examples/`
@@ -47,6 +49,7 @@ diese Liste durchgehen. Ein offenes Kästchen = Lauf nicht fertig.
 
 ## Übergabe
 
-- [ ] Sicht(en), Knoten-/Kantenzahl, Quelle genannt
+- [ ] Sicht(en), Knoten-/Kantenzahl, Quelle genannt — oder „Bereits angewendet“
 - [ ] Startbefehl genannt
-- [ ] Bedienung in wenigen Zeilen genannt
+- [ ] Bedienung in wenigen Zeilen genannt (bei Erstlauf)
+- [ ] `.graph-mastermind.json` liegt im App-Verzeichnis

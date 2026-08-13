@@ -1,7 +1,9 @@
 # graph-explorer
 
-Referenz-SPA für den Graph-Mastermind. Canvas 2D + d3-force,
-fünf gebündelte Fallback-Datasets, kein Backend.
+Graph-Mastermind-Installation. Marker: `.graph-mastermind.json`.
+Kein zweites `graph-explorer` in demselben Repo aufsetzen.
+
+Referenz-SPA: Canvas 2D + d3-force, fünf Fallback-Datasets, kein Backend.
 
 ```bash
 npm install

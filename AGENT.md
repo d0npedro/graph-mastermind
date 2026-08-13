@@ -60,6 +60,10 @@ Diese Regeln haben Vorrang vor jeder Bitte um „noch mehr Effekt“.
 9. **Kein Purple-Glow, keine Gradient-Blobs, keine Spielzeug-Ästhetik.**
 10. **Kein React-State pro Simulation-Tick.** Positionen leben in der
     Simulation / in Refs, nicht in `useState` auf jedem Tick.
+11. **Kein zweites Aufsetzen.** Existiert bereits eine Graph-Mastermind-App
+    in diesem Repo, erzeugst du keine zweite (`graph-explorer-2`,
+    `graph-explorer-netzwerk`, Kopie unter anderem Namen). Du meldest
+    den Fund und hörst auf — außer die vorhandene App ist unvollständig.
 
 Wenn eine Regel und eine „nette Extra-Idee“ kollidieren: die Regel gewinnt.
 
@@ -73,6 +77,43 @@ Wenn eine Regel und eine „nette Extra-Idee“ kollidieren: die Regel gewinnt.
 2. `SPEC.md` für Muss-Features, Datenmodell, Interaktion, Performance, Design.
 3. `examples/` als Format-Referenz und als Fallback-Vorrat.
 4. `CHECKLIST.md` — dagegen nimmst du am Ende ab.
+
+### Phase 0b — Schon angewendet? (vor jedem Schreiben)
+
+Suche im **Zielprojekt** (nicht in `node_modules`, nicht in `.git`):
+
+| Signal | Bedeutung |
+|---|---|
+| `.graph-mastermind.json` irgendwo | verbindlicher Stempel: hier liegt eine Installation |
+| `graph-explorer/src/graph/use-graph-runtime.ts` | Referenz-Layout |
+| `apps/graph-explorer/` mit derselben Runtime | Monorepo-Layout |
+| Route `/graph` plus `use-graph-runtime.ts` | integriert in eine bestehende App |
+
+Trifft eines zu **und** die App hat Canvas + Toolbar + Datasets:
+
+1. Keine neue App anlegen. Kein `-netzwerk`. Kein zweites Klon-Verzeichnis
+   der Runtime.
+2. Dem Menschen sofort sagen, dass der Graph schon da ist. Format:
+
+```markdown
+## Bereits angewendet
+- Ort: <pfad>
+- Start: cd <pfad> && npm install && npm run dev
+- Aktion: nichts neu aufgesetzt
+```
+
+3. Nur dann weiterarbeiten:
+   - **Reparieren**, wenn Muss-Features aus `SPEC.md` fehlen oder Build rot ist.
+   - **Daten auffrischen** (`src/data/graphs.ts` ersetzen, Runtime lassen),
+     wenn der Projektbaum sich klar vom gespeicherten Graphen unterscheidet.
+   - Sonst: **stopp**. Der wiederholte Prompt ist derselbe Auftrag, nicht
+     ein Auftrag zur Neuinstallation.
+
+Unvollständige Hülle (leeres `graph-explorer/`, kein Canvas): das ist kein
+Treffer. Dann normal ab Phase 1 weiter, im selben Ordner fertigmachen.
+
+Nach einem erfolgreichen **ersten** Lauf schreibst du den Stempel
+`<graph-app-dir>/.graph-mastermind.json` (siehe Abschnitt 6).
 
 ### Phase 1 — Repo scannen
 
@@ -297,7 +338,29 @@ Entscheide still nach der ersten passenden Zeile:
 | Anderer Stack oder kein Frontend | Eigenes Verzeichnis `graph-explorer/` in der Repo-Wurzel |
 | Ziel ist leer / nur dieses Agent-Paket liegt darin | `graph-explorer/` mit Default-Stack, plus Fallback-Graphen |
 
-Namenskollision: hänge `-netzwerk` an (`graph-explorer-netzwerk`). Nicht löschen.
+Namenskollision:
+
+- Ordner heißt `graph-explorer` **und** ist bereits Graph-Mastermind
+  (Stempel oder `use-graph-runtime.ts`) → Phase 0b, nicht umbenennen.
+- Ordner heißt `graph-explorer` und ist etwas **anderes** →
+  `graph-explorer-netzwerk`. Nicht löschen.
+
+Nach dem ersten erfolgreichen Lauf **verpflichtend** schreiben:
+
+`<graph-app-dir>/.graph-mastermind.json`
+
+```json
+{
+  "package": "graph-mastermind",
+  "source": "https://github.com/d0npedro/graph-mastermind",
+  "applied": true,
+  "appDir": "graph-explorer",
+  "start": "cd graph-explorer && npm install && npm run dev"
+}
+```
+
+`appDir` und `start` an den echten Pfad anpassen. Datei nicht in
+`.gitignore` stecken — der nächste Agent muss sie finden.
 
 Bestehenden Stack „respektieren“ heißt:
 
@@ -335,6 +398,7 @@ an den Zielstack anpassen, Verantwortungen nicht:
 
 ```
 graph-explorer/
+  .graph-mastermind.json   # Stempel für Folge-Läufe
   package.json
   index.html
   vite.config.ts
@@ -424,6 +488,10 @@ Der Lauf ist fertig, wenn **alles** gilt:
 - [ ] Kein Auth, kein Pflicht-Backend, keine Setup-Frage an den Menschen
 - [ ] Keine Emojis, kein Purple-Glow, Primary nur sparsam
 - [ ] Übergabe enthält Startbefehl und Bedienung (Abschnitt 4, Phase 7)
+      **oder** das Format „Bereits angewendet“ aus Phase 0b
+- [ ] `.graph-mastermind.json` liegt neben der App (nach Erstlauf oder
+      schon vorhanden)
+- [ ] Keine zweite Graph-App erzeugt
 - [ ] `CHECKLIST.md` ist abgehakt
 
 ---
@@ -438,3 +506,5 @@ dann ist diese Datei das einzige Gesetz. `SPEC.md` präzisiert Features.
 `examples/` ist Format und Fallback. `CHECKLIST.md` ist die Abnahme.
 
 Du fragst nicht nach, ob du anfangen sollst. Du führst die Phasen 0–7 aus.
+Phase 0b gilt auch, wenn der Mensch die URL zum zweiten Mal schickt und
+vergessen hat, dass der Graph schon existiert.

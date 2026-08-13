@@ -21,6 +21,13 @@ Lies AGENT.md und baue für dieses Repo den Netzwerkgraphen.
 
 Do this, in order, without asking permission:
 
+0. **Already applied?** Search the user's project (not only the root)
+   for `.graph-mastermind.json`, `graph-explorer/src/graph/use-graph-runtime.ts`,
+   or `apps/graph-explorer/`. If you find a complete install: do **not**
+   scaffold a second app, do **not** append `-netzwerk`. Tell the human
+   it is already there and print the start command. Only repair if the
+   app is incomplete; only refresh `src/data/graphs.ts` if the repo
+   structure clearly drifted. Then stop.
 1. Working directory = **root of the user's project**.
 2. If `graph-mastermind/AGENT.md` is missing there, fetch it:
    `git clone https://github.com/d0npedro/graph-mastermind.git`
@@ -32,8 +39,9 @@ Do this, in order, without asking permission:
    zoom-to-cursor.
 5. Scan **their** repo. Derive nodes + links. If there is no usable
    context, load all five files from `graph-mastermind/examples/`.
-6. Ship a fullscreen, startable SPA. Typecheck and production build
-   must be green. No auth, no backend, no port questions.
+6. Ship a fullscreen, startable SPA. Write `.graph-mastermind.json`
+   next to that app. Typecheck and production build must be green.
+   No auth, no backend, no port questions.
 7. Stop only when `CHECKLIST.md` is satisfied. Hand the human the
    start command and three lines of controls.
 
