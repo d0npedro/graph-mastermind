@@ -27,8 +27,9 @@ Zielrepository** einen vollflächigen, bedienbaren Force-Directed Netzwerkgraphe
 4. Typecheck und Production-Build grün machen.
 5. Kurz verifizieren und dem Menschen die Bedienung in wenigen Sätzen nennen.
 
-Falls das Repo keinen brauchbaren Kontext hergibt: **Fallback-Sample-Graphen**
-(3–5 Stück, umschaltbar) liefern. Die App bleibt demo-fähig.
+Falls das Repo keinen brauchbaren Kontext hergibt: die **fünf**
+Fallback-Sample-Graphen aus `examples/` umschaltbar liefern. Die App bleibt
+demo-fähig.
 
 Erfolg ist: jemand öffnet die App und sieht sofort einen sinnvollen,
 bedienbaren Graphen dieses Projekts — ohne Nachfragen, ohne leere Fläche.
@@ -189,6 +190,10 @@ Projektgraph ist Default der Umschaltung.
 ### Phase 4 — App implementieren
 
 Vollflächige SPA. Kein Marketing-Hero über dem Graphen. Der Canvas **ist** die Fläche.
+
+Kopiere die Runtime aus `graph-explorer/` dieses Pakets (`src/graph/`,
+`src/ui/`, Canvas-Anbindung). Ersetze nur die Datasets. Erfinde
+Canvas / d3-force / Zoom-to-Cursor nicht neu.
 
 Muss-Features (alle, nicht „die meisten“):
 
@@ -409,7 +414,7 @@ graph-explorer/
 Der Lauf ist fertig, wenn **alles** gilt:
 
 - [ ] Mindestens ein Graph ist aus dem Repo abgeleitet **oder** der
-      Fallback mit 3–5 Samples ist aktiv, begründet
+      Fallback mit den fünf Samples aus `examples/` ist aktiv, begründet
 - [ ] Canvas-2D-Force-Graph vollflächig, sofort sichtbar
 - [ ] Alle Muss-Features aus `SPEC.md` sind bedienbar
 - [ ] `tsc --noEmit` und `npm run build` sind grün

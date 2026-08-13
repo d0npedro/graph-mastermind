@@ -45,9 +45,9 @@ Eine startbare SPA (integriert oder als `graph-explorer/`):
 - Canvas-2D + d3-force, ziehbare Knoten, Zoom-to-Cursor, Pan
 - Kantenlabels, Suche (Highlight/Dim), Detailpanel
 - Aufheizen / Einfrieren / Einpassen, Labels an/aus
-- Graph aus **diesem** Repo — oder 3–5 Fallback-Samples, wenn nichts da ist
+- Graph aus **diesem** Repo — oder die fünf Fallback-Samples, wenn nichts da ist
 
-Start der fertigen App (typisch):
+Referenz-App in diesem Paket (dieselben fünf Datasets):
 
 ```bash
 cd graph-explorer
@@ -64,7 +64,8 @@ Kein Login. Kein Backend. Keine Port-Frage.
 | `AGENT.md` | Arbeitsanweisung — allein genug, um den Auftrag auszuführen |
 | `SPEC.md` | Muss-Features, Datenmodell, Interaktion, Performance, Design, Stack |
 | `CHECKLIST.md` | Abnahme nach dem Lauf im Zielprojekt |
-| `examples/` | Mini-Datensätze (Dependency, Team) als Format + Fallback |
+| `examples/` | Fünf Fallback-Datasets (Module, Team, Domäne, Datenmodell, Pipeline) |
+| `graph-explorer/` | Referenz-SPA: Canvas 2D + d3-force, kopierbare Runtime |
 
 ## Regeln in einem Satz
 

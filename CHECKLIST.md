@@ -7,7 +7,7 @@ diese Liste durchgehen. Ein offenes Kästchen = Lauf nicht fertig.
 
 - [ ] Repo wurde gescannt (Baum, Manifeste, Docs, Domain-Typen)
 - [ ] Hauptgraph stammt aus dem Projekt **oder** Fallback ist schriftlich begründet
-- [ ] Fallback, falls genutzt, umfasst 3–5 umschaltbare Datasets
+- [ ] Fallback, falls genutzt, umfasst die fünf Datasets aus `examples/`
 - [ ] Keine erfundenen Module, solange echter Kontext existierte
 - [ ] Links zeigen nur auf existierende Node-IDs
 

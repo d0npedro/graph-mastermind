@@ -62,7 +62,13 @@ Invarianten:
   in einem engen Bereich (z. B. 1–3 CSS-Pixel vor DPR).
 - Datasets liegen als TypeScript-Module im Bundle. Kein Pflicht-Fetch.
 
-Beispiel-Dateien: `examples/dependency-graph.json`, `examples/team-graph.json`.
+Beispiel-Dateien (alle fünf Fallback-Datasets):
+
+- `examples/dependency-graph.json`
+- `examples/team-graph.json`
+- `examples/domain-graph.json`
+- `examples/datamodel-graph.json`
+- `examples/pipeline-graph.json`
 
 ---
 
