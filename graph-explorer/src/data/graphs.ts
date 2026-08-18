@@ -1,12 +1,14 @@
 import datamodel from "../../../examples/datamodel-graph.json";
 import dependency from "../../../examples/dependency-graph.json";
 import domain from "../../../examples/domain-graph.json";
+import project from "../../../examples/graph-mastermind.json";
 import pipeline from "../../../examples/pipeline-graph.json";
 import team from "../../../examples/team-graph.json";
 import type { GraphDataset } from "../graph/types";
 import { validateDataset } from "../graph/validate";
 
 export const datasets: GraphDataset[] = [
+  project,
   dependency,
   team,
   domain,

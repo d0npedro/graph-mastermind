@@ -1,0 +1,181 @@
+{
+  "id": "graph-mastermind",
+  "title": "Graph-Mastermind",
+  "description": "Dieses Repository: Agent-Paket, Referenz-SPA und die Runtime-Schichten, die der Agent kopiert.",
+  "nodes": [
+    {
+      "id": "agent",
+      "label": "AGENT.md",
+      "group": "paket",
+      "description": "System-Prompt. Scannt das Zielrepo, leitet Knoten und Kanten ab, liefert eine demo-fertige SPA.",
+      "meta": { "rolle": "system-prompt", "pfad": "AGENT.md" }
+    },
+    {
+      "id": "spec",
+      "label": "SPEC.md",
+      "group": "paket",
+      "description": "Muss-Features, Datenmodell, Interaktion, Performance und Design. Ergänzt AGENT.md, ersetzt sie nicht.",
+      "meta": { "rolle": "spezifikation", "pfad": "SPEC.md" }
+    },
+    {
+      "id": "checklist",
+      "label": "CHECKLIST.md",
+      "group": "qualitaet",
+      "description": "Abnahme für einen Lauf im Zielprojekt. Offenes Kästchen heißt: nicht fertig.",
+      "meta": { "rolle": "abnahme", "pfad": "CHECKLIST.md" }
+    },
+    {
+      "id": "apply-docs",
+      "label": "docs/apply.md",
+      "group": "paket",
+      "description": "Kurzanweisung für Coding-Agents: Paket holen, AGENT.md lesen, Graph bauen.",
+      "meta": { "rolle": "agent-brief", "pfad": "docs/apply.md" }
+    },
+    {
+      "id": "examples",
+      "label": "examples/",
+      "group": "daten",
+      "description": "Fünf Fallback-Datasets plus dieser Projektgraph. Format-Referenz und Demo-Vorrat.",
+      "meta": { "rolle": "datasets", "dateien": 6 }
+    },
+    {
+      "id": "validate",
+      "label": "validate",
+      "group": "daten",
+      "description": "Prüft IDs, Duplikate und Link-Endpunkte, bevor die Simulation startet.",
+      "meta": { "pfad": "graph-explorer/src/graph/validate.ts" }
+    },
+    {
+      "id": "app",
+      "label": "App",
+      "group": "ui",
+      "description": "Vollfläche: Toolbar, Canvas, Detailpanel. Kein Marketing-Hero über dem Graphen.",
+      "meta": { "pfad": "graph-explorer/src/App.tsx" }
+    },
+    {
+      "id": "toolbar",
+      "label": "Toolbar",
+      "group": "ui",
+      "description": "Suche, Graph-Wechsel, Aufheizen, Einfrieren, Einpassen, Label-Schalter.",
+      "meta": { "pfad": "graph-explorer/src/ui/Toolbar.tsx" }
+    },
+    {
+      "id": "search-field",
+      "label": "Suche",
+      "group": "ui",
+      "description": "Echtes Suchfeld. Treffer gegen Label, ID, Gruppe und Beschreibung.",
+      "meta": { "pfad": "graph-explorer/src/ui/SearchField.tsx" }
+    },
+    {
+      "id": "graph-canvas",
+      "label": "Canvas",
+      "group": "ui",
+      "description": "Ein 2D-Canvas, touch-none. Zeichnen über die Runtime, nicht über SVG-Knoten.",
+      "meta": { "pfad": "graph-explorer/src/ui/GraphCanvas.tsx" }
+    },
+    {
+      "id": "detail-panel",
+      "label": "Detailpanel",
+      "group": "ui",
+      "description": "Auswahl: Gruppe, Label, Beschreibung, Meta, Nachbarn mit Kantenlabel.",
+      "meta": { "pfad": "graph-explorer/src/ui/DetailPanel.tsx" }
+    },
+    {
+      "id": "runtime",
+      "label": "use-graph-runtime",
+      "group": "runtime",
+      "description": "rAF plus Dirty-Flag. Simulation-Ticks setzen keinen React-State.",
+      "meta": { "pfad": "graph-explorer/src/graph/use-graph-runtime.ts" }
+    },
+    {
+      "id": "simulation",
+      "label": "Simulation",
+      "group": "runtime",
+      "description": "d3-force: Link, ManyBody, Center, Collide. Freeze ruft stop(), Reheat startet neu.",
+      "meta": { "pfad": "graph-explorer/src/graph/simulation.ts" }
+    },
+    {
+      "id": "render",
+      "label": "Render",
+      "group": "runtime",
+      "description": "Kanten, Knoten, Labels. Suche dimmt Nicht-Treffer über globalAlpha.",
+      "meta": { "pfad": "graph-explorer/src/graph/render.ts" }
+    },
+    {
+      "id": "camera",
+      "label": "Kamera",
+      "group": "runtime",
+      "description": "Zoom zur Cursorposition, Pan, Fit, Clamp 0.15–6. Transform in einer Ref.",
+      "meta": { "pfad": "graph-explorer/src/graph/camera.ts" }
+    },
+    {
+      "id": "hit-test",
+      "label": "Hit-Test",
+      "group": "runtime",
+      "description": "Welcher Knoten liegt unter dem Pointer, in Weltkoordinaten.",
+      "meta": { "pfad": "graph-explorer/src/graph/hit-test.ts" }
+    },
+    {
+      "id": "search-engine",
+      "label": "Search",
+      "group": "runtime",
+      "description": "Trefferlogik und Nachbarschaft für Panel und Dimming.",
+      "meta": { "pfad": "graph-explorer/src/graph/search.ts" }
+    },
+    {
+      "id": "tests",
+      "label": "Vitest",
+      "group": "qualitaet",
+      "description": "Kamera, DPR, Pin, Render-Invarianten, Suche, Dataset-Validierung.",
+      "meta": { "pfad": "graph-explorer/src/graph/*.test.ts" }
+    },
+    {
+      "id": "vite",
+      "label": "Vite + React",
+      "group": "stack",
+      "description": "Referenz-Stack, wenn das Zielrepo kein tragfähiges Frontend hat.",
+      "meta": { "runtime": "TypeScript" }
+    },
+    {
+      "id": "d3-force",
+      "label": "d3-force",
+      "group": "stack",
+      "description": "Force-Layout. Positionen leben in der Simulation, nicht in React-State.",
+      "meta": { "paket": "d3-force" }
+    },
+    {
+      "id": "tailwind",
+      "label": "Tailwind v4",
+      "group": "stack",
+      "description": "CSS-first Tokens. Dunkel, niedriges Chroma, Primary nur sparsam.",
+      "meta": { "paket": "tailwindcss" }
+    }
+  ],
+  "links": [
+    { "source": "apply-docs", "target": "agent", "label": "führt aus" },
+    { "source": "agent", "target": "spec", "label": "ergänzt" },
+    { "source": "agent", "target": "checklist", "label": "nimmt ab" },
+    { "source": "agent", "target": "examples", "label": "Fallback" },
+    { "source": "agent", "target": "app", "label": "liefert" },
+    { "source": "spec", "target": "validate", "label": "invarianten" },
+    { "source": "examples", "target": "validate", "label": "geprüft" },
+    { "source": "validate", "target": "runtime", "label": "zulässig" },
+    { "source": "app", "target": "runtime", "label": "bindet" },
+    { "source": "app", "target": "toolbar", "label": "hostet" },
+    { "source": "app", "target": "graph-canvas", "label": "hostet" },
+    { "source": "app", "target": "detail-panel", "label": "hostet" },
+    { "source": "toolbar", "target": "search-field", "label": "enthält" },
+    { "source": "runtime", "target": "simulation", "label": "treibt" },
+    { "source": "runtime", "target": "render", "label": "zeichnet" },
+    { "source": "runtime", "target": "camera", "label": "transformiert" },
+    { "source": "runtime", "target": "hit-test", "label": "trifft" },
+    { "source": "render", "target": "search-engine", "label": "dimmt" },
+    { "source": "detail-panel", "target": "search-engine", "label": "nachbarn" },
+    { "source": "checklist", "target": "tests", "label": "deckt" },
+    { "source": "tests", "target": "camera", "label": "prüft" },
+    { "source": "tests", "target": "validate", "label": "prüft" },
+    { "source": "simulation", "target": "d3-force", "label": "nutzt" },
+    { "source": "app", "target": "vite", "label": "baut" },
+    { "source": "app", "target": "tailwind", "label": "themed" }
+  ]
+}

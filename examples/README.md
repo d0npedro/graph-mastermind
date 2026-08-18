@@ -1,19 +1,23 @@
 # Beispieldaten
 
-Zwei vollständige Datasets im kanonischen Modell aus `SPEC.md`.
+Datasets im kanonischen Modell aus `SPEC.md`.
 
-Der Agent nutzt sie als:
+| Datei | Sicht | Rolle |
+|---|---|---|
+| `graph-mastermind.json` | Dieses Paket | Default der Referenz-App |
+| `dependency-graph.json` | Software-Module | Fallback für fremde Repos |
+| `team-graph.json` | Rollen und Zusammenarbeit | Fallback |
+| `domain-graph.json` | Fachliche Konzepte | Fallback |
+| `datamodel-graph.json` | Entitäten und Relationen | Fallback |
+| `pipeline-graph.json` | Verarbeitungsschritte | Fallback |
+
+Der Agent nutzt die fünf Fallback-Dateien als:
 
 1. **Format-Referenz** beim Ableiten eines Projektgraphen
 2. **Fallback**, wenn das Zielrepo keinen brauchbaren Kontext hat
 
-Keine App. Keine extra Dependencies. Beim Fallback alle fünf Dateien
-als Datasets übernehmen (nicht neu erfinden, nicht kürzen).
+`graph-mastermind.json` beschreibt **dieses** Repository. Nicht als
+Fallback in ein fremdes Zielprojekt kopieren.
 
-| Datei | Sicht |
-|---|---|
-| `dependency-graph.json` | Software-Module und Abhängigkeiten |
-| `team-graph.json` | Rollen und Zusammenarbeit |
-| `domain-graph.json` | Fachliche Konzepte |
-| `datamodel-graph.json` | Entitäten und Relationen |
-| `pipeline-graph.json` | Verarbeitungsschritte |
+Keine App. Keine extra Dependencies. Beim Fallback alle fünf
+`*-graph.json`-Samples übernehmen (nicht neu erfinden, nicht kürzen).

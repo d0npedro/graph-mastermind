@@ -46,7 +46,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="flex h-full flex-col bg-surface text-ink">
+    <div className="flex h-dvh flex-col bg-surface text-ink">
       <Toolbar
         datasets={datasets}
         datasetId={dataset.id}
